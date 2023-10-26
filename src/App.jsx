@@ -15,10 +15,6 @@ function App() {
     phantom.connect({ onlyIfTrusted: true }).catch(() => {
       // fail silently
     });
-  }, []);
-
-  useEffect(() => {
-    if (!phantom) return;
 
     phantom.on("connect", (publicKey) => {
       setPubKey(publicKey);
@@ -32,6 +28,7 @@ function App() {
 
     phantom.on("disconnect", () => {
       setPubKey(null);
+      setBalance(0);
       console.log("Disconneted");
     });
 
